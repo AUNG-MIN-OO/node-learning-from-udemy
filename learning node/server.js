@@ -1,14 +1,40 @@
 const http = require('http');
+const fs = require('fs');
 
 const server = http.createServer((req, res)=>{
 
-    res.setHeader('content-type', 'text/html');
+    var filename;
 
-    res.write('<h1>Hello World</h1>')
+    switch (req.url) {
+        case '/':
+            filename = "/index.html";
+            break;
+        case '/about':
+            filename = "/about.html";
+            break;
+        case '/contact':
+            filename = "/contact.html";
+            break;
+        case '/contact-us':
+            res.statusCode = 301;
+            res.setHeader('location','/contact');
+            break;
+        default:
+            filename = "/404.html";
+            break;
+    }
 
-    console.log('request made from client');
+    console.log(req.url);
 
-    res.end();
+    fs.readFile('./view'+filename,(err, data)=>{
+        if(err){
+            console.log(err);
+            res.end();
+        }else{
+            res.write(data);
+            res.end();
+        }
+    });
 })
 
 server.listen('3000', 'localhost', ()=>{
