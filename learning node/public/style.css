@@ -1,0 +1,58 @@
+.blog-form{
+    background-color: #eee;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px -2px rgba(0,0,0,0.75);
+}
+
+.blog-form h1{
+    text-align: center;
+    color: darkslateblue;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+.form-group label,input{
+    display: block;
+}
+
+.form-group label{
+    font-size: 20px;
+    font-weight: bold;
+    color: blueviolet;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.form-group input{
+    background-color: #eee;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+    font-size: 15px;
+}
+
+.form-group input:focus-visible {
+    outline: blueviolet auto 1px;
+}
+
+.blog-create-btn{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.blog-delete-btn{
+    padding: 3px 7px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 10px;
+}

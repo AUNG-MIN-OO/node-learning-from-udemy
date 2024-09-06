@@ -1,24 +1,39 @@
 const { name } = require('ejs');
 const express = require('express');
+let mongoose = require('mongoose');
+let expressLayouts = require('express-ejs-layouts');
+const BlogRoutes = require('./routes/BlogRoutes');
+
 
 const app = express();
 
+app.use(express.urlencoded({extended : true}));
+
+app.use(express.static('public'));
+
+app.use(BlogRoutes);
+
+//dburl
+let mongodburl = "mongodb+srv://aungminoo:aungminoo@test1.sgeuc.mongodb.net/?retryWrites=true&w=majority&appName=test1";
+
+mongoose.connect(mongodburl).then(()=>{
+    console.log('mongo db is connected');
+
+    app.listen(3000, ()=>{
+        console.log('app is running on port 3000');
+    })
+}).catch(e => {
+    console.log(e);
+})
+
 app.set('views','./view');
 app.set('view engine','ejs');
+app.use(expressLayouts);
+app.set('layout','layouts/default');
 
-app.get('/',(req, res)=>{
+app.get('/',async(req, res)=>{
 
-    let blogs = [
-        {title : "title 1", blog : "content 1"},
-        {title : "title 2", blog : "content 2"},
-        {title : "title 3", blog : "content 3"},
-    ]
-
-    res.render('index',{
-        name : "mg mg",
-        age : 21,
-        blogs
-    });
+    res.redirect('/blogs');
 })
 
 app.get('/about',(req, res)=>{
@@ -33,6 +48,5 @@ app.use((req,res)=>{
     res.status(404).render('404');
 })
 
-app.listen(3000, ()=>{
-    console.log('app is running on port 3000');
-})
+
+

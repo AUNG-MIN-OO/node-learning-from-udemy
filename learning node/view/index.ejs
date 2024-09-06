@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Pro</title>
-</head>
-<body>
-    <h1>Welcome from <%= name %> server</h1>
-    <p><%= age %> everyone</p>
+<h1>Welcome from server</h1>
 
     <% if (blogs.length) { %>
         <h1>Blog List</h1>
         <% blogs.forEach(blog => { %>       
-            <h3><%= blog.title %></h3>
-            <p><%= blog.blog %></p>
+            <a href="/blogs/<%= blog._id %>">
+                <h3><%= blog.title %></h3>
+            </a>
+            <p><%= blog.intro %></p>
+            <form action="/blogs/delete/<%= blog.id %>" method="POST">
+                <button class="blog-delete-btn" type="submit">Delete</button>
+            </form>
         <% }) %>
     <% } %>
-
-</body>
-</html>
